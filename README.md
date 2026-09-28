@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Louis Jay Fuentes — Portfolio
 
-## Getting Started
-
-First, run the development server:
+Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · Motion · Lucide.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev     # http://localhost:3000
+npm run build   # production build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Replacing placeholder content
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Everything editable lives in `src/content/`:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| File | What it holds |
+| --- | --- |
+| `site.ts` | Name, email, Upwork / GitHub / LinkedIn URLs, availability flag. **All links are placeholders.** |
+| `projects.ts` | The three featured projects (title, copy, stack, links, layout, tint hue). |
+| `lab.ts` | Experiments, stack groups, services, process steps. |
 
-## Learn More
+Set `NEXT_PUBLIC_SITE_URL` in production so canonical and Open Graph URLs are correct.
 
-To learn more about Next.js, take a look at the following resources:
+### Adding real screenshots
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Put images in `public/projects/` (e.g. `project-01.png`, ideally 2x resolution).
+2. In `projects.ts`, set `image: { src: "/projects/project-01.png", alt: "…", width, height }`.
+   For Project 01 you can also set `imageMobile` for the layered phone view.
+3. Set `placeholder: false` once the copy is real.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Without `image`, a coded UI mock is rendered instead, so nothing ever shows a broken image.
 
-## Deploy on Vercel
+Links set to `"#"` render as "soon" states rather than dead links. Replace them with real URLs.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To show a photo in the About section, add `public/portrait.jpg` (4:5, at least 800px wide). It appears automatically.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Writing style used on the site: plain first person, no slogans, no invented numbers. Keep new copy the same way.
+
+Case studies live at `/work/[slug]` (`src/app/work/[slug]/page.tsx`) and are placeholder templates for now.
+
+## Structure
+
+```
+src/app/                 layout (metadata, fonts), page, case studies, OG image, icon, robots, sitemap
+src/components/sections  one file per homepage section (server components by default)
+src/components/work      browser/phone frames, UI mocks, parallax wrapper
+src/components/ui        button, section heading, brand icons, contact channels
+```
+
+Client components are limited to interactive pieces: nav, hero process panel, experiment filter,
+parallax, reveal-on-scroll, copy-email. All motion respects `prefers-reduced-motion`.
