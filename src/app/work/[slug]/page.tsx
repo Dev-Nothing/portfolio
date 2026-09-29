@@ -25,8 +25,8 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
   };
 }
 
-// Case-study outline. Every section is a placeholder until real write-ups exist.
-const sections = [
+// Case-study outline, shown for projects that don't have a write-up yet.
+const outline = [
   ["Overview", "What the product is, who it's for, and what your role was."],
   ["The problem", "What was broken, slow or missing before this existed."],
   ["Architecture", "Data model, key routes and APIs, integrations, and why you chose them."],
@@ -91,15 +91,30 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
           </div>
 
           <div className="mx-auto mt-20 max-w-3xl space-y-14 md:mt-28">
-            <p className="rounded-md border border-line p-4 text-sm leading-relaxed text-muted">
-              This case study is a placeholder. Each section below says what should go there.
-            </p>
-            {sections.map(([h, hint]) => (
-              <Reveal key={h} as="section">
-                <h2 className="text-2xl font-medium tracking-[-0.025em] sm:text-3xl">{h}</h2>
-                <p className="mt-4 text-lg leading-relaxed text-muted">[Placeholder] {hint}</p>
-              </Reveal>
-            ))}
+            {project.caseStudy ? (
+              project.caseStudy.map((s) => (
+                <Reveal key={s.heading} as="section">
+                  <h2 className="text-2xl font-medium tracking-[-0.025em] sm:text-3xl">{s.heading}</h2>
+                  <div className="mt-4 space-y-4 text-lg leading-relaxed text-fg-2">
+                    {s.body.map((para) => (
+                      <p key={para}>{para}</p>
+                    ))}
+                  </div>
+                </Reveal>
+              ))
+            ) : (
+              <>
+                <p className="rounded-md border border-line p-4 text-sm leading-relaxed text-muted">
+                  This case study is a placeholder. Each section below says what should go there.
+                </p>
+                {outline.map(([h, hint]) => (
+                  <Reveal key={h} as="section">
+                    <h2 className="text-2xl font-medium tracking-[-0.025em] sm:text-3xl">{h}</h2>
+                    <p className="mt-4 text-lg leading-relaxed text-muted">[Placeholder] {hint}</p>
+                  </Reveal>
+                ))}
+              </>
+            )}
           </div>
 
           <Link
