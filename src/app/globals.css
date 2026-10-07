@@ -26,6 +26,8 @@
   html {
     color-scheme: dark;
     scroll-behavior: smooth;
+    /* Proximity, not mandatory: settles onto sections near a boundary but never traps long ones. */
+    scroll-snap-type: y proximity;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -46,8 +48,10 @@
     color: var(--color-ink);
   }
 
-  section[id] {
+  section[id],
+  [data-snap] {
     scroll-margin-top: 4.5rem;
+    scroll-snap-align: start;
   }
 
   :focus-visible {
@@ -87,5 +91,192 @@
     .rise {
       animation: none;
     }
+  }
+
+  /* ——— Backdrop ——— */
+
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .backdrop > * {
+    position: absolute;
+  }
+
+  /* Two large, very soft glows drifting slowly. */
+  .backdrop-glow {
+    width: 60vmax;
+    height: 60vmax;
+    border-radius: 9999px;
+    filter: blur(90px);
+    will-change: transform;
+  }
+  .backdrop-glow-a {
+    top: -30vmax;
+    left: -18vmax;
+    background: radial-gradient(closest-side, rgb(232 137 74 / 0.11), transparent);
+    animation: drift-a 38s ease-in-out infinite alternate;
+  }
+  .backdrop-glow-b {
+    right: -22vmax;
+    bottom: -32vmax;
+    background: radial-gradient(closest-side, rgb(110 140 220 / 0.08), transparent);
+    animation: drift-b 46s ease-in-out infinite alternate;
+  }
+  @keyframes drift-a {
+    to {
+      transform: translate(18vmax, 22vmax) scale(1.15);
+    }
+  }
+  @keyframes drift-b {
+    to {
+      transform: translate(-16vmax, -20vmax) scale(1.1);
+    }
+  }
+
+  /* Dot grid that fades out toward the edges. */
+  .backdrop-grid {
+    inset: 0;
+    background-image: radial-gradient(rgb(255 255 255 / 0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black, transparent);
+  }
+
+  /* Spotlight under the pointer; also brightens the dot grid it passes over. */
+  .backdrop-spot {
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.6s;
+    background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 50%), rgb(232 137 74 / 0.07), transparent 65%);
+  }
+  :root[data-pointer="on"] .backdrop-spot {
+    opacity: 1;
+  }
+
+  .backdrop-grain {
+    inset: -50%;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .backdrop-glow {
+      animation: none;
+    }
+  }
+
+  /* ——— Hover effects ——— */
+
+  /* Card glow that follows the pointer (position fed by <Backdrop />). */
+  [data-spotlight] {
+    position: relative;
+    isolation: isolate;
+  }
+  [data-spotlight]::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+    background: radial-gradient(420px circle at var(--sx, 50%) var(--sy, 50%), rgb(255 255 255 / 0.045), transparent 70%);
+  }
+  [data-spotlight]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    padding: 1px;
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+    background: radial-gradient(300px circle at var(--sx, 50%) var(--sy, 50%), rgb(232 137 74 / 0.55), transparent 70%);
+    mask:
+      linear-gradient(#000 0 0) content-box exclude,
+      linear-gradient(#000 0 0);
+  }
+  [data-spotlight]:hover::before,
+  [data-spotlight]:hover::after {
+    opacity: 1;
+  }
+
+  /* Light sweep across a button on hover. */
+  .shine {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .shine::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    transform: translateX(-120%) skewX(-20deg);
+    /* currentColor, so it reads on both the light primary and the dark secondary button. */
+    background: linear-gradient(90deg, transparent, color-mix(in oklab, currentColor 16%, transparent), transparent);
+    transition: transform 0.7s var(--ease-out-expo);
+  }
+  .shine:hover::after {
+    transform: translateX(120%) skewX(-20deg);
+  }
+
+  /* Underline that grows from the left. */
+  .grow-line {
+    position: relative;
+  }
+  .grow-line::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.35s var(--ease-out-expo);
+  }
+  .grow-line:hover::after,
+  .grow-line[aria-current="true"]::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  .grow-line[aria-current="true"]::after {
+    opacity: 0.4;
+  }
+
+  /* List row with an accent bar that slides in and a nudge to the right. */
+  .row-hover {
+    position: relative;
+    transition: background-color 0.3s;
+  }
+  .row-hover::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-ember);
+    transform: scaleY(0);
+    transition: transform 0.35s var(--ease-out-expo);
+  }
+  .row-hover:hover {
+    background-color: rgb(255 255 255 / 0.025);
+  }
+  .row-hover:hover::before {
+    transform: scaleY(1);
+  }
+  .row-hover .nudge {
+    transition: transform 0.35s var(--ease-out-expo);
+  }
+  .row-hover:hover .nudge {
+    transform: translateX(12px);
   }
 }

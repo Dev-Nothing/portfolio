@@ -13,7 +13,10 @@ export function Stack() {
               <h3 className="border-b border-line pb-3 text-sm text-muted">{g.group}</h3>
               <ul className="mt-3 space-y-1.5 text-lg">
                 {g.items.map((t) => (
-                  <li key={t} className={i === 2 ? "text-fg-2" : ""}>
+                  <li
+                    key={t}
+                    className={`w-fit cursor-default transition-[color,translate] duration-300 ease-out-expo hover:translate-x-1.5 hover:text-ember ${i === 2 ? "text-fg-2" : ""}`}
+                  >
                     {t}
                   </li>
                 ))}

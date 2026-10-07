@@ -57,7 +57,7 @@ function Row({ e }: { e: Experiment }) {
   const inner = (
     <>
       <span className="hidden font-mono text-xs text-faint sm:block sm:pt-1">{e.id}</span>
-      <span className="min-w-0">
+      <span className="nudge min-w-0">
         <span className="flex items-center gap-2 font-medium">
           {e.name}
           {real && (
@@ -75,9 +75,9 @@ function Row({ e }: { e: Experiment }) {
     </>
   );
   const cls =
-    "group grid grid-cols-[1fr_auto] items-start gap-x-6 gap-y-2 border-b border-line py-5 sm:grid-cols-[2.5rem_1fr_7rem] md:grid-cols-[2.5rem_1fr_14rem_7rem]";
+    "row-hover group grid grid-cols-[1fr_auto] items-start gap-x-6 gap-y-2 border-b border-line py-5 sm:grid-cols-[2.5rem_1fr_7rem] md:grid-cols-[2.5rem_1fr_14rem_7rem]";
   return real ? (
-    <a href={e.href} target="_blank" rel="noopener noreferrer" className={`${cls} transition-colors hover:bg-white/[0.02]`}>
+    <a href={e.href} target="_blank" rel="noopener noreferrer" className={cls}>
       {inner}
     </a>
   ) : (

@@ -30,7 +30,7 @@ const outline = [
   ["Overview", "What the product is, who it's for, and what your role was."],
   ["The problem", "What was broken, slow or missing before this existed."],
   ["Architecture", "Data model, key routes and APIs, integrations, and why you chose them."],
-  ["How AI was used, and where it wasn't", "Which parts were AI-assisted, what you had to catch in review, what you wrote by hand."],
+  ["How we worked", "How the work was scoped, planned and delivered."],
   ["Result", "What shipped and what's next. Only include outcomes you can actually back up."],
 ] as const;
 

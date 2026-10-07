@@ -20,12 +20,16 @@ export function Nav({ home = true }: { home?: boolean }) {
   // Underline the nav item for whichever section is crossing the middle of the viewport.
   useEffect(() => {
     if (!home) return;
-    const sections = navItems
-      .map((i) => document.querySelector<HTMLElement>(i.href))
-      .filter((el): el is HTMLElement => el !== null);
+    // Watch every section, so the underline clears on ones that aren't in the nav (e.g. Services).
+    const inNav = new Set<string>(navItems.map((i) => i.href));
+    const sections = document.querySelectorAll<HTMLElement>("main section[id]");
     const io = new IntersectionObserver(
       (entries) => {
-        for (const e of entries) if (e.isIntersecting) setActive(`#${e.target.id}`);
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          const id = `#${e.target.id}`;
+          setActive(inNav.has(id) ? id : null);
+        }
       },
       { rootMargin: "-45% 0px -50% 0px" },
     );
@@ -73,8 +77,8 @@ export function Nav({ home = true }: { home?: boolean }) {
                     <a
                       href={href(item.href)}
                       aria-current={isActive ? "true" : undefined}
-                      className={`text-sm underline-offset-[6px] transition-colors ${
-                        isActive ? "text-fg underline decoration-fg/40" : "text-muted hover:text-fg"
+                      className={`grow-line text-sm transition-colors ${
+                        isActive ? "text-fg" : "text-muted hover:text-fg"
                       }`}
                     >
                       {item.label}

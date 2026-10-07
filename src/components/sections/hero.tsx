@@ -14,8 +14,7 @@ export function Hero() {
 
         <div className="mt-10 grid gap-10 md:grid-cols-12 md:gap-8">
           <p className="rise max-w-lg text-pretty text-xl leading-relaxed text-fg-2 [--d:140ms] md:col-span-7">
-            You bring the idea. I plan it, build it and get it live, using AI to move faster and reviewing
-            everything before it ships.
+            You bring the idea. I plan it, build it and get it live, and I test everything before it ships.
           </p>
           <div className="rise flex flex-col gap-3 [--d:220ms] sm:flex-row md:col-span-5 md:items-end md:justify-end">
             <Button href="#work" icon={<ArrowDown className="size-4" aria-hidden />}>

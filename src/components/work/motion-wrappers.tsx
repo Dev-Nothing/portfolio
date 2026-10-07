@@ -25,6 +25,7 @@ export function ProjectCard({ children, className = "" }: { children: React.Reac
   return (
     <motion.div
       className={className}
+      data-spotlight
       variants={card}
       initial="hidden"
       whileInView="show"

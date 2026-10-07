@@ -241,17 +241,17 @@ const STAGES: Stage[] = [
   },
   {
     name: "Architecture",
-    text: "Decide the data model and routes before generating any code. Mistakes here are the expensive ones.",
+    text: "Decide the data model and routes before writing any code. Mistakes here are the expensive ones.",
     Example: ArchitectureExample,
   },
   {
     name: "Build",
-    text: "Claude Code or Cursor drafts each piece. I steer it, read what it wrote, and correct it as I go.",
+    text: "Build it in small, working pieces, so there is something real to review at every step.",
     Example: BuildExample,
   },
   {
     name: "Test",
-    text: "Tests for the parts that hurt when they break: auth, permissions, payments. This is where AI mistakes show up.",
+    text: "Tests for the parts that hurt when they break: auth, permissions, payments. This is where the real bugs show up.",
     Example: TestExample,
   },
   {

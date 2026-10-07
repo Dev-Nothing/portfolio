@@ -12,7 +12,7 @@ export function Services() {
           title="What you can hire me for"
           intro={
             <>
-              Not sure your project fits?{" "}
+              Every change is reviewed and tested before it goes live. Not sure your project fits?{" "}
               <a href="#contact" className="link text-fg-2">
                 Ask me.
               </a>{" "}
@@ -23,9 +23,11 @@ export function Services() {
         <Reveal className="mt-12 md:grid md:grid-cols-12 md:gap-8">
           <ul className="grid gap-x-8 sm:grid-cols-2 md:col-span-9 md:col-start-4">
             {services.map((s) => (
-              <li key={s.name} className="border-b border-line py-5">
-                <h3 className="font-medium">{s.name}</h3>
-                <p className="mt-1 text-[15px] leading-relaxed text-muted">{s.detail}</p>
+              <li key={s.name} className="row-hover border-b border-line py-5">
+                <div className="nudge">
+                  <h3 className="font-medium">{s.name}</h3>
+                  <p className="mt-1 text-[15px] leading-relaxed text-muted">{s.detail}</p>
+                </div>
               </li>
             ))}
           </ul>

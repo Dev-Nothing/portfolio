@@ -72,6 +72,12 @@ export const projects: Project[] = [
         ],
       },
       {
+        heading: "How we worked",
+        body: [
+          "Buildovate is a large product that keeps growing, so the work runs in cycles. The client brings the next feature they want. I work out how it fits into the existing app, build it, ship it to staging and then production, and we move on to the next one.",
+        ],
+      },
+      {
         heading: "What I built",
         body: [
           "Leads and agreements. A lead pipeline that turns into agreements with line items, a price book, payment stages, deposits and change orders.",
@@ -134,6 +140,12 @@ export const projects: Project[] = [
         ],
       },
       {
+        heading: "How we worked",
+        body: [
+          "The client came with a clear brief: what the app should do, how it should look, and the compliance rules it had to follow. Before writing any code, I went through the brief with them, suggested changes, and planned the screens and data. Then I built the complete prototype and handed over a working, deployed app, along with a database design ready for the next stage.",
+        ],
+      },
+      {
         heading: "What I built",
         body: [
           "A dashboard with portfolio value, debt, equity, loan-to-value ratio, rent and net cash flow, plus cards that flag what needs attention, such as a missing document or a fixed rate that's about to expire.",
@@ -189,6 +201,12 @@ export const projects: Project[] = [
         heading: "The problem",
         body: [
           "Each marketplace has its own search form, its own category list and its own way of writing prices and locations. Checking all of them means repeating the same search ten times and spotting the same business listed on more than one site.",
+        ],
+      },
+      {
+        heading: "How we worked",
+        body: [
+          "The client knew what they wanted: one search across the marketplaces they use, with results they could save and export. Before building, I tested which sites could be scraped reliably, suggested dropping the ones that block scrapers, and planned a shared filter that every site could support. Then I built the full app and delivered it deployed and ready to use, with a screen that explains which sites were left out and why.",
         ],
       },
       {

@@ -1,4 +1,4 @@
-// Experiments, stack, services and process content.
+// Experiments, stack and services content.
 // Experiments below are SAMPLE entries. Replace them with your real ones.
 
 export type ExperimentStatus = "live" | "experiment" | "building" | "archived";
@@ -77,7 +77,7 @@ export const stack = [
   },
   {
     group: "AI & automation",
-    items: ["Claude Code", "Cursor", "AI APIs", "n8n", "Playwright", "MCP"],
+    items: ["AI APIs", "n8n", "Playwright", "MCP"],
   },
   {
     group: "Where I started",
@@ -92,12 +92,4 @@ export const services = [
   { name: "Automation and AI workflows", detail: "n8n flows, scheduled jobs, steps that call an LLM." },
   { name: "Bug fixes and new features", detail: "Working inside a codebase someone else started." },
   { name: "Scraping and browser automation", detail: "Collecting data or scripting repetitive tasks with Playwright." },
-] as const;
-
-export const process = [
-  { step: "1", name: "Understand", detail: "Work out what the product needs to do, who uses it and what matters most." },
-  { step: "2", name: "Plan", detail: "Sketch the data model, API routes and main screens before any code is written." },
-  { step: "3", name: "Build", detail: "Write it in small pieces, using Claude Code or Cursor to speed up the typing." },
-  { step: "4", name: "Review", detail: "Read the generated code, fix what's wrong, refactor, and add tests." },
-  { step: "5", name: "Ship", detail: "Deploy, connect the integrations, and fix what comes up once real people use it." },
 ] as const;

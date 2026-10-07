@@ -16,7 +16,7 @@ export function Footer() {
                 href={href}
                 aria-label={label}
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                className="grid size-9 place-items-center rounded-md text-muted transition-colors hover:bg-white/[0.05] hover:text-fg"
+                className="grid size-9 place-items-center rounded-md text-muted transition-[color,background-color,translate] duration-300 ease-out-expo hover:-translate-y-0.5 hover:bg-white/[0.05] hover:text-ember"
               >
                 <Icon className="size-4" aria-hidden />
               </a>

@@ -40,7 +40,7 @@ export function Contact() {
                       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                       className="group inline-flex items-center gap-2 text-fg-2 transition-colors hover:text-fg"
                     >
-                      <Icon className="size-4 text-muted" aria-hidden />
+                      <Icon className="size-4 text-muted transition-[color,rotate,scale] duration-300 group-hover:-rotate-6 group-hover:scale-110 group-hover:text-ember" aria-hidden />
                       <span className="link">{label}</span>
                     </a>
                   </li>

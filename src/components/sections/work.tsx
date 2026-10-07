@@ -12,13 +12,13 @@ export function Work() {
         <SectionHeading
           id="work-title"
           label="Selected work"
-          title="Three recent projects"
-          intro="A production SaaS with a mobile app, an investor prototype, and a live scraper. Each one started as an empty repo."
+          title="Projects I've built"
+          intro="Real products I've taken from first commit to launch."
         />
 
         <div className="mt-14 space-y-10 md:mt-20 md:space-y-14">
           {projects.map((p, i) => (
-            <article key={p.slug} aria-labelledby={`${p.slug}-title`} style={{ "--h": p.hue } as React.CSSProperties}>
+            <article key={p.slug} data-snap aria-labelledby={`${p.slug}-title`} style={{ "--h": p.hue } as React.CSSProperties}>
               <ProjectItem project={p} priority={i === 0} />
             </article>
           ))}

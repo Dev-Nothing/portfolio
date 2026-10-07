@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Reveal } from "@/components/reveal";
 
 const facts = [
-  ["Now", "Next.js and TypeScript, with AI coding tools"],
+  ["Now", "Next.js, TypeScript and Node.js"],
   ["Before", "PHP, Laravel and MySQL: APIs, dashboards, integrations"],
   ["Good at", "Taking a product from idea to production and keeping it running"],
   ["Works", "Remote, happy with async, writes clear updates"],
@@ -41,8 +41,8 @@ export function About() {
                 dashboards, and integrations with whatever third-party service a project needed that week.
               </p>
               <p>
-                Now I mostly work in Next.js and TypeScript, and AI coding tools are part of how I build every day. They
-                make me a lot faster. The experience is what tells me when the code they write is wrong.
+                Now I mostly work in Next.js, TypeScript and Node.js, building SaaS products, integrations and
+                automation. I review and test everything before it ships.
               </p>
               <p className="text-muted">
                 I like owning a product from start to finish, from the first rough idea to the version real people use.

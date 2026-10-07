@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, Schibsted_Grotesk } from "next/font/google";
+import { Backdrop } from "@/components/backdrop";
 import { MotionProvider } from "@/components/motion-provider";
 import { site } from "@/content/site";
 import "./globals.css";
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
+        <Backdrop />
         <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
